@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.c202001090145.oyh"/>
+    <!--    用bean来创建一个类 视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--    为这个类注入两个属性，一个前缀值，一个后缀。以/WEB-INF/jsp/login.jsp为例-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/bookstore?characterEncoding=utf8&amp;serverTimezone=UTC"/>
+        <!--        数据库用户名和密码-->
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+    </bean>
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+</beans>
